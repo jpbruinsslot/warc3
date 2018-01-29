@@ -152,8 +152,8 @@ class WARCRecord(object):
             else:
                 self.header['Content-Length'] = "0"
                 
-        if defaults is True and 'WARC-Payload-Digest' not in self.header:
-            self.header['WARC-Payload-Digest'] = self._compute_digest(payload)
+        if defaults is True and 'WARC-Block-Digest' not in self.header:
+            self.header['WARC-Block-Digest'] = self._compute_digest(payload)
 
         if isinstance(payload, bytes):
             payload = io.BytesIO(payload)
@@ -195,7 +195,7 @@ class WARCRecord(object):
 
     @property
     def checksum(self):
-        return self.header.get('WARC-Payload-Digest')
+        return self.header.get('WARC-Block-Digest')
 
     @property
     def offset(self):
